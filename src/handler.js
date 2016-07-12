@@ -43,6 +43,7 @@ const handler = (req, res) => {
         // // reply is null when the key is missing
         //     res.end(reply);
         // });
+        console.log('getting ' + key1);
         pg.connect(process.env.DATABASE_URL, (err, client) => {
           if (err) throw err;
 
