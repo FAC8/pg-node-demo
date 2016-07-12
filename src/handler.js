@@ -49,7 +49,7 @@ const handler = (req, res) => {
           client
             .query('SELECT answer FROM questions WHERE key = $1::text;', [key1], (err, answers) => {
               console.log(answers);
-              res.end(answers.rows[0].question);
+              res.end(answers.rows[0].answer);
 
               // disconnect the client
               client.end(function (err) {
