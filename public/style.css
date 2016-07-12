@@ -1,0 +1,35 @@
+html, body{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: sans-serif;
+  background-color: #1060C0;
+}
+
+body {
+  display: table;
+  width: 100%;
+  background-size: 100%;
+}
+
+.wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+
+#title {
+  font-family: scriptin;
+  font-size: 3em;
+  line-height: 1.75em;
+  color: white;
+  margin-top: -2em;
+  margin-bottom: 0;
+  -webkit-font-smoothing: antialiased;
+  text-shadow: 1px 1px 0 #00185b;
+  font-smooth: always;
+}
+
+#searchBox {
+  font-size: 1.2em;
+}
