@@ -38,16 +38,16 @@ const handler = (req, res) => {
         res.writeHead(200, {'Content-Type' : 'text/plain'});
         res.end('Added to database');
     } else if (url.includes('/get?')) {
-        const key = url.split('=')[1];
+        const key1 = url.split('=')[1];
 
-        console.log('getting ' + key);
+        console.log('getting ' + key1);
         pg.connect(process.env.DATABASE_URL, (err, client) => {
           if (err) throw err;
 
           console.log('connected to postgres! Getting schemas...');
 
           client
-            .query('SELECT answer FROM questions WHERE key = $1::text;', [key], (err, answers) => {
+            .query('SELECT answer FROM questions WHERE key = $1::text;', [key1], (err, answers) => {
               console.log(answers);
               res.end(answers.rows[0].question);
 
