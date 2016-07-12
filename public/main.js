@@ -1,6 +1,6 @@
 'use strict';
 
-const SERVER_URL = 'https://heroku-redis-tutorial.herokuapp.com/';
+// const SERVER_URL = 'https://heroku-redis-tutorial.herokuapp.com/';
 
 const setButton = document.getElementById('set');
 const getButton = document.getElementById('get');
@@ -17,7 +17,7 @@ function sendSet(key, value, callback) {
     }
   };
 
-  xhr.open('GET', `${SERVER_URL}/set?q=${key}&${value}`);
+  xhr.open('GET', `/set?q=${key}&${value}`);
   xhr.send();
 }
 
