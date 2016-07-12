@@ -2,20 +2,17 @@ const fs = require('fs');
 const pg = require('pg');
 
 pg.defaults.ssl = true;
-pg.connect(process.env.DATABASE_URL, (err, client) => {
-  if (err) throw err;
-
-  console.log('connected to postgres! Getting schemas...');
-
-  client
-    .query('SELECT table_schema, table_name FROM information_schema.tables;')
-    .on('row', (row) => {
-      console.log(JSON.stringify(row));
-    });
-});
-
-// var client = redis.createClient(process.env.REDISCLOUD_URL, {no_ready_check: true});
-
+// pg.connect(process.env.DATABASE_URL, (err, client) => {
+//   if (err) throw err;
+//
+//   console.log('connected to postgres! Getting schemas...');
+//
+//   client
+//     .query('SELECT table_schema, table_name FROM information_schema.tables;')
+//     .on('row', (row) => {
+//       console.log(JSON.stringify(row));
+//     });
+// });
 
 const handler = (req, res) => {
     const url = req.url;
@@ -37,6 +34,7 @@ const handler = (req, res) => {
         const key = all.split('&')[0];
         const param = all.split('&')[1];
         // client.set(key, param);
+        // pg.connect()
         res.writeHead(200, {'Content-Type' : 'text/plain'});
         res.end('Added to database');
     } else if (url.includes('/get?')) {
@@ -45,6 +43,23 @@ const handler = (req, res) => {
         // // reply is null when the key is missing
         //     res.end(reply);
         // });
+        pg.connect(process.env.DATABASE_URL, (err, client) => {
+          if (err) throw err;
+
+          console.log('connected to postgres! Getting schemas...');
+
+          client
+            .query('SELECT * FROM questions;', (err, answers) => {
+              console.log(answers);
+              res.end(answers);
+
+              // disconnect the client
+              client.end(function (err) {
+                if (err) throw err;
+              });
+            });
+        });
+
     } else {
         res.writeHead(404);
         res.end('no comprende bitches');
