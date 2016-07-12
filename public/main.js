@@ -30,7 +30,7 @@ function sendGet(key, callback) {
     }
   };
 
-  xhr.open('GET', `${SERVER_URL}/get?q=${key}`);
+  xhr.open('GET', `/get?q=${key}`);
   xhr.send();
 }
 
